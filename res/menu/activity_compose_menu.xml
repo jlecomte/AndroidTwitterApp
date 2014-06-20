@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item
+        android:id="@+id/miCancel"
+        android:icon="@drawable/ic_action_cancel"
+        android:showAsAction="ifRoom"
+        android:onClick="onCancel"
+        android:title="@string/cancel_title">
+    </item>
+    <item
+        android:id="@+id/miSend"
+        android:icon="@drawable/ic_action_send_tweet"
+        android:showAsAction="ifRoom"
+        android:onClick="onSend"
+        android:title="@string/send_title">
+    </item>
+</menu>
