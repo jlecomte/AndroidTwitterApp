@@ -21,6 +21,7 @@
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/ivProfileImage"
         android:textStyle="bold"
+        android:textSize="14sp"
         android:text="@string/mock_user_name_label" />
 
     <TextView
@@ -29,6 +30,17 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvUserName"
         android:layout_toRightOf="@+id/ivProfileImage"
+        android:textSize="12sp"
         android:text="@string/mock_tweet_body" />
+
+    <TextView
+        android:id="@+id/tvTimestamp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:text="@string/mock_timestamp"
+        android:textColor="@android:color/tertiary_text_light"
+        android:textSize="12sp" />
 
 </RelativeLayout>

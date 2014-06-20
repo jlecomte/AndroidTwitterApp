@@ -7,15 +7,24 @@
     <EditText
         android:id="@+id/etStatus"
         android:layout_width="wrap_content"
-        android:layout_height="150dp"
+        android:layout_height="120dp"
         android:gravity="top"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:hint="@string/compose_edittext_hint"
+        android:maxLength="140"
         android:ems="10" >
 
         <requestFocus />
     </EditText>
+
+    <TextView
+        android:id="@+id/tvCharCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/etStatus"
+        android:layout_marginLeft="5dp"/>
 
 </RelativeLayout>
