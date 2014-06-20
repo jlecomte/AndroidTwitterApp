@@ -1,8 +1,10 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.SwipeRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="${packageName}.${activityClass}" >
+    tools:context="${packageName}.${activityClass}"
+    android:id="@+id/swipe_container">
 
     <ListView
         android:id="@+id/lvTweets"
@@ -15,4 +17,4 @@
 
     </ListView>
 
-</RelativeLayout>
+</android.support.v4.widget.SwipeRefreshLayout>

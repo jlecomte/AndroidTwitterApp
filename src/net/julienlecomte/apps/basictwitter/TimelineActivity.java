@@ -10,6 +10,8 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,6 +25,8 @@ public class TimelineActivity extends Activity {
 	private TwitterClient client;
 	private ArrayList<Tweet> tweets;
 	private ArrayAdapter<Tweet> aTweets;
+
+	private SwipeRefreshLayout swipeLayout;
 	private ListView lvTweets;
 
 	private static final int COMPOSE_ACTIVITY_REQUEST_CODE = 100;
@@ -33,6 +37,19 @@ public class TimelineActivity extends Activity {
 		setContentView(R.layout.activity_timeline);
 
 		setupViews();
+
+	    swipeLayout.setOnRefreshListener(new OnRefreshListener() {
+			
+			@Override
+			public void onRefresh() {
+				fetchNewTweets();
+			}
+		});
+
+	    swipeLayout.setColorScheme(android.R.color.holo_blue_dark,
+	            android.R.color.holo_green_dark,
+	            android.R.color.holo_orange_dark,
+	            android.R.color.holo_red_dark);
 
 		client = TwitterApp.getRestClient();
 
@@ -58,6 +75,7 @@ public class TimelineActivity extends Activity {
 	}
 
 	void setupViews() {
+		swipeLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
 		lvTweets = (ListView) findViewById(R.id.lvTweets);
 	}
 
@@ -66,6 +84,7 @@ public class TimelineActivity extends Activity {
 	}
 
 	void fetchOldTweets(String max_id) {
+		swipeLayout.setRefreshing(true);
 		client.getHomeTimeline(null, max_id, new JsonHttpResponseHandler() {
 			@Override
 			public void onSuccess(JSONArray tweets) {
@@ -77,10 +96,16 @@ public class TimelineActivity extends Activity {
 				Log.d("debug", e.toString());
 				Log.d("debug", s);
 			}
+
+			@Override
+			public void onFinish() {
+				swipeLayout.setRefreshing(false);
+			}
 		});
 	}
 
 	void fetchNewTweets() {
+		swipeLayout.setRefreshing(true);
 		String since_id = String.valueOf(tweets.get(0).getUid());
 		client.getHomeTimeline(since_id, null, new JsonHttpResponseHandler() {
 			@Override
@@ -93,6 +118,11 @@ public class TimelineActivity extends Activity {
 			public void onFailure(Throwable e, String s) {
 				Log.d("debug", e.toString());
 				Log.d("debug", s);
+			}
+
+			@Override
+			public void onFinish() {
+				swipeLayout.setRefreshing(false);
 			}
 		});
 	}
