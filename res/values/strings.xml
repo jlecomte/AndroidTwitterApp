@@ -4,9 +4,9 @@
     <string name="app_name">Basic Twitter</string>
     <string name="action_settings">Settings</string>
     <string name="login_label">Sign in with Twitter</string>
-    <string name="title_activity_timeline">Activity Timeline</string>
+    <string name="title_activity_timeline">My Twitter Timeline</string>
     <string name="mock_user_name_label">\@foo</string>
-    <string name="mock_tweet_body">This is the body of a very long tweet...</string>
+    <string name="mock_tweet_body">This is the body of a tweet</string>
     <string name="user_profile_image_content_desc">User profile image</string>
     <string name="compose_title">Compose</string>
     <string name="cancel_title">Cancel</string>
