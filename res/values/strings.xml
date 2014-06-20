@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Basic Twitter</string>
+    <string name="app_name">Twiddlator!</string>
     <string name="action_settings">Settings</string>
     <string name="login_label">Sign in with Twitter</string>
     <string name="title_activity_timeline">My Twitter Timeline</string>
