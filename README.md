@@ -37,4 +37,4 @@ The following advanced user stories are optional:
 Screen Capture
 --------------
 
-TODO...
+![Screen capture](ScreenCapture.gif)
