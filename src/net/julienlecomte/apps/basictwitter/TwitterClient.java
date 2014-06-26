@@ -32,17 +32,8 @@ public class TwitterClient extends OAuthBaseClient {
         super(context, REST_API_CLASS, REST_URL, REST_CONSUMER_KEY, REST_CONSUMER_SECRET, REST_CALLBACK_URL);
     }
 
-    /* 1. Define the end point URL with getApiUrl and pass a relative path to the end point
-     * 	  i.e getApiUrl("statuses/home_timeline.json");
-     * 2. Define the parameters to pass to the request (query or body)
-     *    i.e RequestParams params = new RequestParams("foo", "bar");
-     * 3. Define the request method and make a call to the client
-     *    i.e client.get(apiUrl, params, handler);
-     *    i.e client.post(apiUrl, params, handler);
-     */
-
-    public void getHomeTimeline(String since_id, String max_id, AsyncHttpResponseHandler handler) {
-    	String apiUrl = getApiUrl("statuses/home_timeline.json");
+    private void getTimeline(String api, String since_id, String max_id, AsyncHttpResponseHandler handler) {
+    	String apiUrl = getApiUrl(api);
 
     	RequestParams params = new RequestParams();
 
@@ -55,6 +46,23 @@ public class TwitterClient extends OAuthBaseClient {
     	}
    
     	client.get(apiUrl, params, handler);
+    }
+
+    /* 1. Define the end point URL with getApiUrl and pass a relative path to the end point
+     * 	  i.e getApiUrl("statuses/home_timeline.json");
+     * 2. Define the parameters to pass to the request (query or body)
+     *    i.e RequestParams params = new RequestParams("foo", "bar");
+     * 3. Define the request method and make a call to the client
+     *    i.e client.get(apiUrl, params, handler);
+     *    i.e client.post(apiUrl, params, handler);
+     */
+
+    public void getHomeTimeline(String since_id, String max_id, AsyncHttpResponseHandler handler) {
+    	getTimeline("statuses/home_timeline.json", since_id, max_id, handler);
+    }
+
+    public void getMentionsTimeline(String since_id, String max_id, AsyncHttpResponseHandler handler) {
+    	getTimeline("statuses/mentions_timeline.json", since_id, max_id, handler);
     }
 
     public void postUpdate(String status, AsyncHttpResponseHandler handler) {

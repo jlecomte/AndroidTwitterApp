@@ -14,5 +14,7 @@
     <string name="title_activity_compose">Compose</string>
     <string name="compose_edittext_hint">What\'s happening?</string>
     <string name="mock_timestamp">4h</string>
+    <string name="home_tab_lbl">Home</string>
+    <string name="mentions_tab_lbl">Mentions</string>
 
 </resources>
