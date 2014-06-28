@@ -136,7 +136,7 @@ public abstract class TweetsListFragment extends Fragment {
 		getTimeline(null, max_id, fetchOldTweetsHandler);
 	}
 
-	protected void fetchNewTweets() {
+	public void fetchNewTweets() {
 		swipeLayout.setRefreshing(true);
 
 		String since_id = null;

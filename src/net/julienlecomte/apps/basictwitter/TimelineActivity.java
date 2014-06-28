@@ -41,7 +41,7 @@ public class TimelineActivity extends FragmentActivity {
 			.setIcon(R.drawable.ic_home)
 			.setTag("HomeTimelineFragment")
 			.setTabListener(
-				new FragmentTabListener<HomeTimelineFragment>(R.id.flContainer, this, "first",
+				new FragmentTabListener<HomeTimelineFragment>(R.id.flContainer, this, "home_timeline",
 						HomeTimelineFragment.class));
 
 		actionBar.addTab(tab1);
@@ -53,7 +53,7 @@ public class TimelineActivity extends FragmentActivity {
 			.setIcon(R.drawable.ic_mentions)
 			.setTag("MentionsTimelineFragment")
 			.setTabListener(
-			    new FragmentTabListener<MentionsTimelineFragment>(R.id.flContainer, this, "second",
+			    new FragmentTabListener<MentionsTimelineFragment>(R.id.flContainer, this, "mentions_timeline",
 			    		MentionsTimelineFragment.class));
 
 		actionBar.addTab(tab2);
@@ -84,7 +84,13 @@ public class TimelineActivity extends FragmentActivity {
 				client.postUpdate(status, new JsonHttpResponseHandler() {
 					@Override
 					public void onSuccess(JSONObject jsonObject) {
-						// TODO: refresh timeline...
+						// Refresh home timeline...
+						HomeTimelineFragment frag1 = (HomeTimelineFragment) getSupportFragmentManager().findFragmentByTag("home_timeline");
+						if (frag1 != null) {
+							frag1.fetchNewTweets();
+						}
+						// I suppose we should check whether I am mentioned to figure out
+						// whether I also need to refresh the mentions timeline...
 					}
 
 					@Override
