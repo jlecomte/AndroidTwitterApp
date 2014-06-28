@@ -54,7 +54,12 @@ The following advanced user stories are optional:
 * Advanced: User can search for tweets matching a particular query and see results
 * Bonus: User can view their direct messages (or send new ones)
 
-Screen Capture
---------------
+Second Screen Capture (Week 4 assignment)
+-----------------------------------------
+
+![Screen capture](ScreenCapture2.gif)
+
+First Screen Capture (Week 3 assignment)
+----------------------------------------
 
 ![Screen capture](ScreenCapture.gif)
