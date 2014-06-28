@@ -20,7 +20,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 public abstract class TweetsListFragment extends Fragment {
@@ -51,7 +53,9 @@ public abstract class TweetsListFragment extends Fragment {
 			@Override
 			public void onFailure(Throwable e, String s) {
 				Log.d("debug", e.toString());
-				Log.d("debug", s);
+				// TODO: localize error message...
+				Toast.makeText(getActivity(), "Oops,  an error occurred:\n" + e.toString(),
+						Toast.LENGTH_SHORT).show();
 			}
 
 			@Override
@@ -70,7 +74,9 @@ public abstract class TweetsListFragment extends Fragment {
 			@Override
 			public void onFailure(Throwable e, String s) {
 				Log.d("debug", e.toString());
-				Log.d("debug", s);
+				// TODO: localize error message...
+				Toast.makeText(getActivity(), "Oops,  an error occurred:\n" + e.toString(),
+						Toast.LENGTH_SHORT).show();
 			}
 
 			@Override
@@ -124,6 +130,23 @@ public abstract class TweetsListFragment extends Fragment {
 		fetchOldTweets(null);
 	}
 
-	abstract protected void fetchOldTweets(String max_id);
-	abstract protected void fetchNewTweets();
+	protected void fetchOldTweets(String max_id) {
+		swipeLayout.setRefreshing(true);
+		getTimeline(null, max_id, fetchOldTweetsHandler);
+	}
+
+	protected void fetchNewTweets() {
+		swipeLayout.setRefreshing(true);
+
+		String since_id = null;
+
+		if (tweets.size() > 0) {
+			since_id = String.valueOf(tweets.get(0).getUid());
+		}
+
+		getTimeline(since_id, null, fetchNewTweetsHandler);
+	}
+
+	abstract protected void getTimeline(String since_id, String max_id,
+			AsyncHttpResponseHandler handler);
 }

@@ -6,6 +6,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.text.Html;
+
 public class Tweet {
 	private long uid;
 	private String body;
@@ -17,7 +19,7 @@ public class Tweet {
 
 		try {
 			tweet.uid = jsonObject.getLong("id");
-			tweet.body = jsonObject.getString("text");
+			tweet.body = Html.fromHtml(jsonObject.getString("text")).toString();
 			tweet.createdAt = jsonObject.getString("created_at");
 			tweet.user = User.fromJson(jsonObject.getJSONObject("user"));
 		} catch (JSONException e) {

@@ -51,6 +51,10 @@
             android:name="net.julienlecomte.apps.basictwitter.ComposeActivity"
             android:label="@string/title_activity_compose" >
         </activity>
+        <activity
+            android:name="net.julienlecomte.apps.basictwitter.ProfileActivity"
+            android:label="@string/title_activity_profile" >
+        </activity>
     </application>
 
 </manifest>

@@ -60,12 +60,6 @@ public class ComposeActivity extends Activity {
 		tvCharCount = (TextView) findViewById(R.id.tvCharCount);
 	}
 
-	public void onCancel(MenuItem mi) {
-		Intent i = new Intent();
-		setResult(RESULT_CANCELED, i);
-		finish();
-	}
-
 	public void onSend(MenuItem mi) {
 		Intent i = new Intent();
 		i.putExtra("status", etStatus.getText().toString());

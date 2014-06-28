@@ -1,0 +1,77 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="${packageName}.${activityClass}" >
+
+    <RelativeLayout
+        android:id="@+id/rlHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:padding="7dp">
+
+        <ImageView
+	        android:id="@+id/ivProfileImage"
+	        android:layout_width="75dp"
+	        android:layout_height="75dp"
+	        android:layout_alignParentLeft="true"
+	        android:layout_alignParentTop="true"
+	        android:layout_marginRight="10dp"
+	        android:contentDescription="@string/user_profile_image_content_desc"
+	        android:src="@android:drawable/screen_background_light_transparent" />
+
+   		<TextView
+	        android:id="@+id/tvName"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentTop="true"
+	        android:layout_toRightOf="@+id/ivProfileImage"
+	        android:textStyle="bold"
+	        android:textSize="16sp" />
+
+   		<TextView
+	        android:id="@+id/tvTagLine"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@+id/tvName"
+	        android:layout_alignLeft="@+id/tvName"
+	        android:textSize="14sp" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/llCounts"
+        android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal"
+	    android:layout_below="@+id/rlHeader"
+	    android:paddingLeft="7dp"
+	    android:layout_marginBottom="10dp">
+
+        <TextView
+	        android:id="@+id/tvFollowersCount"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content" />
+
+        <TextView
+	        android:id="@+id/tvFollowingCount"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="20dp" />
+
+    </LinearLayout>
+
+    <fragment
+        android:id="@+id/fragmentUserTimeline"
+        android:name="net.julienlecomte.apps.basictwitter.fragments.UserTimelineFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/llCounts"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        tools:layout="@layout/fragment_tweets_list" />
+
+</RelativeLayout>

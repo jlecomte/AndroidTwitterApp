@@ -1,5 +1,9 @@
 package net.julienlecomte.apps.basictwitter;
 
+import org.json.JSONObject;
+
+import com.loopj.android.http.JsonHttpResponseHandler;
+
 import net.julienlecomte.apps.basictwitter.fragments.HomeTimelineFragment;
 import net.julienlecomte.apps.basictwitter.fragments.MentionsTimelineFragment;
 import net.julienlecomte.apps.basictwitter.listeners.FragmentTabListener;
@@ -8,10 +12,13 @@ import android.app.ActionBar.Tab;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 public class TimelineActivity extends FragmentActivity {
+	private TwitterClient client;
 
 	private static final int COMPOSE_ACTIVITY_REQUEST_CODE = 100;
 
@@ -19,6 +26,7 @@ public class TimelineActivity extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_timeline);
+		client = TwitterApp.getRestClient();
 		setupTabs();
 	}
 
@@ -62,13 +70,31 @@ public class TimelineActivity extends FragmentActivity {
 		startActivityForResult(i, COMPOSE_ACTIVITY_REQUEST_CODE);
 	}
 
+	public void onProfileView(MenuItem mi) {
+		Intent i = new Intent(this, ProfileActivity.class);
+		startActivity(i);
+	}
+
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == COMPOSE_ACTIVITY_REQUEST_CODE &&
 				resultCode == RESULT_OK) {
 			String status = data.getStringExtra("status").trim();
 			if (status.length() > 0) {
-				// TODO
+				client.postUpdate(status, new JsonHttpResponseHandler() {
+					@Override
+					public void onSuccess(JSONObject jsonObject) {
+						// TODO: refresh timeline...
+					}
+
+					@Override
+					public void onFailure(Throwable e, String s) {
+						Log.d("debug", e.toString());
+						// TODO: localize error message...
+						Toast.makeText(TimelineActivity.this, "Oops,  an error occurred:\n" + e.toString(),
+								Toast.LENGTH_SHORT).show();
+					}
+				});
 			}
 		}
 	}

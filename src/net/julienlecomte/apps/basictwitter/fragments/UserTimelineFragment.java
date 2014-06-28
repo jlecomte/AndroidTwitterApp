@@ -2,11 +2,11 @@ package net.julienlecomte.apps.basictwitter.fragments;
 
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
-public class HomeTimelineFragment extends TweetsListFragment {
+public class UserTimelineFragment extends TweetsListFragment {
 
 	@Override
 	protected void getTimeline(String since_id, String max_id,
 			AsyncHttpResponseHandler handler) {
-		client.getHomeTimeline(since_id, max_id, handler);
+		client.getUserTimeline(since_id, max_id, handler);
 	}
 }

@@ -4,10 +4,11 @@
     <string name="app_name">Twiddlator!</string>
     <string name="action_settings">Settings</string>
     <string name="login_label">Sign in with Twitter</string>
-    <string name="title_activity_timeline">My Twitter Timeline</string>
+    <string name="title_activity_timeline">Twiddlator!</string>
     <string name="mock_user_name_label">\@foo</string>
     <string name="mock_tweet_body">This is the body of a tweet</string>
     <string name="user_profile_image_content_desc">User profile image</string>
+    <string name="profile_title">Profile</string>
     <string name="compose_title">Compose</string>
     <string name="cancel_title">Cancel</string>
     <string name="send_title">Send</string>
@@ -16,5 +17,9 @@
     <string name="mock_timestamp">4h</string>
     <string name="home_tab_lbl">Home</string>
     <string name="mentions_tab_lbl">Mentions</string>
+    <string name="title_activity_profile">ProfileActivity</string>
+    <string name="loading_profile">Loading profile&#8230;</string>
+    <string name="mock_full_user_name_label">Foo</string>
+    <string name="mock_tag_line">This is my user tag line</string>
 
 </resources>
