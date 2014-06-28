@@ -1,5 +1,6 @@
 package net.julienlecomte.apps.basictwitter;
 
+import net.julienlecomte.apps.basictwitter.fragments.UserTimelineFragment;
 import net.julienlecomte.apps.basictwitter.models.User;
 
 import org.json.JSONObject;
@@ -9,6 +10,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,7 +22,16 @@ public class ProfileActivity extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_profile);
-		loadProfileInfo();
+		String user_id = getIntent().getStringExtra("user_id");
+		loadProfileInfo(user_id);
+
+		Bundle bundle = new Bundle();
+		bundle.putString("user_id", user_id);
+		UserTimelineFragment fragment = new UserTimelineFragment();
+		fragment.setArguments(bundle);
+		FragmentTransaction sft = getSupportFragmentManager().beginTransaction();
+		sft.add(R.id.flContainer, fragment);
+		sft.commit();
 	}
 
 	protected void populateProfileHeader(User u) {
@@ -40,9 +51,9 @@ public class ProfileActivity extends FragmentActivity {
 		tvFollowingCount.setText(u.getFriendsCount() + " Following");
 	}
 
-	protected void loadProfileInfo() {
+	protected void loadProfileInfo(String user_id) {
 		getActionBar().setTitle(R.string.loading_profile);
-		TwitterApp.getRestClient().getMyInfo(new JsonHttpResponseHandler() {
+		TwitterApp.getRestClient().getUserInfo(user_id, new JsonHttpResponseHandler() {
 			@Override
 			public void onSuccess(JSONObject jsonObject) {
 				User u = User.fromJson(jsonObject);

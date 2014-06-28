@@ -32,7 +32,9 @@ public class TwitterClient extends OAuthBaseClient {
         super(context, REST_API_CLASS, REST_URL, REST_CONSUMER_KEY, REST_CONSUMER_SECRET, REST_CALLBACK_URL);
     }
 
-    private void getTimeline(String api, String since_id, String max_id, AsyncHttpResponseHandler handler) {
+    private void getTimeline(String api, String user_id,
+    		String since_id, String max_id,
+    		AsyncHttpResponseHandler handler) {
     	String apiUrl = getApiUrl(api);
 
     	RequestParams params = new RequestParams();
@@ -44,7 +46,11 @@ public class TwitterClient extends OAuthBaseClient {
     	} else {
     		params.put("since_id", "1");
     	}
-   
+
+    	if (user_id != null) {
+    		params.put("user_id", user_id);
+    	}
+
     	client.get(apiUrl, params, handler);
     }
 
@@ -58,20 +64,34 @@ public class TwitterClient extends OAuthBaseClient {
      */
 
     public void getHomeTimeline(String since_id, String max_id, AsyncHttpResponseHandler handler) {
-    	getTimeline("statuses/home_timeline.json", since_id, max_id, handler);
+    	getTimeline("statuses/home_timeline.json", null, since_id, max_id, handler);
     }
 
     public void getMentionsTimeline(String since_id, String max_id, AsyncHttpResponseHandler handler) {
-    	getTimeline("statuses/mentions_timeline.json", since_id, max_id, handler);
+    	getTimeline("statuses/mentions_timeline.json", null, since_id, max_id, handler);
     }
 
-    public void getUserTimeline(String since_id, String max_id, AsyncHttpResponseHandler handler) {
-    	getTimeline("statuses/user_timeline.json", since_id, max_id, handler);
+    public void getMyTimeline(String since_id, String max_id, AsyncHttpResponseHandler handler) {
+    	getTimeline("statuses/user_timeline.json", null, since_id, max_id, handler);
     }
 
-    public void getMyInfo(AsyncHttpResponseHandler handler) {
-    	String apiUrl = getApiUrl("account/verify_credentials.json");
-    	client.get(apiUrl, null, handler);
+    public void getUserTimeline(String user_id, String since_id, String max_id, AsyncHttpResponseHandler handler) {
+    	getTimeline("statuses/user_timeline.json", user_id, since_id, max_id, handler);
+    }
+
+    public void getUserInfo(String user_id, AsyncHttpResponseHandler handler) {
+    	String apiUrl;
+    	RequestParams params = null;
+
+    	if (user_id == null) {
+    		apiUrl = getApiUrl("account/verify_credentials.json");
+    	} else {
+    		apiUrl = getApiUrl("users/show.json");
+    		params = new RequestParams();
+    		params.put("user_id", user_id);
+    	}
+
+    	client.get(apiUrl, params, handler);
     }
 
     public void postUpdate(String status, AsyncHttpResponseHandler handler) {

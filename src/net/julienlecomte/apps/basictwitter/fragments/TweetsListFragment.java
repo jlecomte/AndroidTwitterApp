@@ -40,6 +40,7 @@ public abstract class TweetsListFragment extends Fragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
 		client = TwitterApp.getRestClient();
 		tweets = new ArrayList<Tweet>();
 		aTweets = new TweetArrayAdapter(getActivity(), tweets);

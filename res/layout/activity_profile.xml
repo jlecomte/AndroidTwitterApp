@@ -63,15 +63,15 @@
 
     </LinearLayout>
 
-    <fragment
-        android:id="@+id/fragmentUserTimeline"
-        android:name="net.julienlecomte.apps.basictwitter.fragments.UserTimelineFragment"
+    <FrameLayout
+        android:id="@+id/flContainer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/llCounts"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        tools:layout="@layout/fragment_tweets_list" />
+        android:layout_alignParentRight="true">
+
+    </FrameLayout>
 
 </RelativeLayout>

@@ -5,17 +5,20 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
 
-import com.nostra13.universalimageloader.core.ImageLoader;
-
 import net.julienlecomte.apps.basictwitter.models.Tweet;
+import net.julienlecomte.apps.basictwitter.models.User;
 import android.content.Context;
+import android.content.Intent;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class TweetArrayAdapter extends ArrayAdapter<Tweet> {
 
@@ -26,6 +29,7 @@ public class TweetArrayAdapter extends ArrayAdapter<Tweet> {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		Tweet tweet = getItem(position);
+		final User user = tweet.getUser();
 
 		View v;
 		if (convertView == null) {
@@ -42,11 +46,21 @@ public class TweetArrayAdapter extends ArrayAdapter<Tweet> {
 
 		ivProfileImage.setImageResource(android.R.color.transparent);
 		ImageLoader imageLoader = ImageLoader.getInstance();
-		imageLoader.displayImage(tweet.getUser().getImageProfileUrl(), ivProfileImage);
+		imageLoader.displayImage(user.getImageProfileUrl(), ivProfileImage);
 
-		tvUserName.setText("@" + tweet.getUser().getScreenName());
+		tvUserName.setText("@" + user.getScreenName());
 		tvTweetBody.setText(tweet.getBody());
 		tvTimestamp.setText(getRelativeTimeAgo(tweet.getCreatedAt()));
+
+		ivProfileImage.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Context context = TweetArrayAdapter.this.getContext();
+				Intent i = new Intent(context, ProfileActivity.class);
+				i.putExtra("user_id", String.valueOf(user.getUid()));
+				context.startActivity(i);
+			}
+		});
 
 		return v;
 	}
